@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: MyString
+  sport: MyString
+  endo_sport_id: 1
+  distance: 1
+  start_time: 2014-02-04
+  duration: 2014-02-04 00:10:40
+
+two:
+  username: MyString
+  sport: MyString
+  endo_sport_id: 1
+  distance: 1
+  start_time: 2014-02-04
+  duration: 2014-02-04 00:10:40
