@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140203230418) do
+ActiveRecord::Schema.define(version: 20140203231040) do
 
   create_table "users", force: true do |t|
     t.string   "username",   limit: 50
@@ -23,5 +23,19 @@ ActiveRecord::Schema.define(version: 20140203230418) do
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true
+
+  create_table "workouts", force: true do |t|
+    t.string   "username"
+    t.string   "sport",         limit: 50
+    t.integer  "endo_sport_id"
+    t.float    "distance"
+    t.date     "start_time"
+    t.time     "duration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "workouts", ["endo_sport_id"], name: "index_workouts_on_endo_sport_id"
+  add_index "workouts", ["username"], name: "index_workouts_on_username"
 
 end

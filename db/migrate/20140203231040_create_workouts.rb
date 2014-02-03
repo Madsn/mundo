@@ -4,7 +4,7 @@ class CreateWorkouts < ActiveRecord::Migration
       t.string :username
       t.string :sport, limit: 50
       t.integer :endo_sport_id
-      t.integer :distance
+      t.float :distance
       t.date :start_time
       t.time :duration
 

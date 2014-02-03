@@ -24,7 +24,7 @@
     <%= f.number_field :endo_sport_id %>
   </div>
   <div class="field">
-    <%= f.label :distance %><br>
+    <%= f.label "distance in meters" %><br>
     <%= f.number_field :distance %>
   </div>
   <div class="field">
@@ -33,7 +33,7 @@
   </div>
   <div class="field">
     <%= f.label :duration %><br>
-    <%= f.time_select :duration %>
+    <%= f.time_select :duration, {include_seconds: true} %>
   </div>
   <div class="actions">
     <%= f.submit %>
