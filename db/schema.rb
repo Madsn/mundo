@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140203231040) do
+ActiveRecord::Schema.define(version: 20140204191240) do
+
+  create_table "charts", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "username",   limit: 50
@@ -28,9 +34,9 @@ ActiveRecord::Schema.define(version: 20140203231040) do
     t.string   "username"
     t.string   "sport",         limit: 50
     t.integer  "endo_sport_id"
-    t.float    "distance" # in km
+    t.float    "distance"
     t.datetime "start_time"
-    t.integer  "duration" # duration in minutes
+    t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
