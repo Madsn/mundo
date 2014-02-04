@@ -33,7 +33,7 @@
   </div>
   <div class="field">
     <%= f.label :duration %><br>
-    <%= f.time_select :duration, {include_seconds: true} %>
+    <%= f.number_field :duration %>
   </div>
   <div class="actions">
     <%= f.submit %>

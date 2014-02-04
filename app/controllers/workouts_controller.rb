@@ -24,7 +24,10 @@ class WorkoutsController < ApplicationController
   # POST /workouts
   # POST /workouts.json
   def create
-    @workout = Workout.new(workout_params)
+    @params = workout_params
+    @params[:distance] = @params[:distance].to_f / 1000
+    puts workout_params
+    @workout = Workout.new(@params)
 
     respond_to do |format|
       if @workout.save

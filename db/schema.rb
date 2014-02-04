@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20140203231040) do
     t.string   "username"
     t.string   "sport",         limit: 50
     t.integer  "endo_sport_id"
-    t.float    "distance"
-    t.date     "start_time"
-    t.time     "duration"
+    t.float    "distance" # in km
+    t.datetime "start_time"
+    t.integer  "duration" # duration in minutes
     t.datetime "created_at"
     t.datetime "updated_at"
   end
