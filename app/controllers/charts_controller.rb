@@ -3,27 +3,29 @@ class ChartsController < ApplicationController
   def line_labels
     distances = Array.new
     durations = Array.new
-    Workout.all.each do |w|
-      distances << w.distance
-      durations << w.duration
+    paces = Array.new
+    dates = Array.new
+    count = params[:count] ? params[:count] : 30
+    Workout.all(:order => "start_time DESC", :limit => count).each do |w|
+      distances.unshift((w.distance / 1000))
+      durations.unshift(w.duration)
+      dates.unshift(w.start_time.to_date)
+      paces.unshift((w.duration / (w.distance/1000)).round(2))
     end
     @chart = LazyHighCharts::HighChart.new('line_labels') do |f|
       f.chart({
          type: 'line'
       })
       f.title({
-        text: 'Monthly Average Temperature'
+        text: 'Run stats'
       })
       f.subtitle({
-          text: 'Source: WorldClimate.com'
+          text: 'Trine Larsen'
       })
       f.xAxis({
-        categories: ['Jan', 'Feb', 'Mar']
+        categories: dates
       })
       f.yAxis({
-         title: {
-                             text: 'Temperature (°C)'
-                         }
       })
       f.tooltip({
         enabled: false,
@@ -42,12 +44,18 @@ class ChartsController < ApplicationController
                          }
       })
       f.series({
-        name: 'Test',
+        name: 'Distance (km)',
         data: distances
       })
       f.series({
-        name: 'Blap',
-        data: durations
+        name: 'Duration (minutes)',
+        data: durations,
+        visible: false,
+        legendIndex: 500
+      })
+      f.series({
+        name: 'Pace (min/km)',
+        data: paces
       })
     end
   end

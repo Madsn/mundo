@@ -1,7 +1,7 @@
 Mundo::Application.routes.draw do
   resources :charts do
     collection do
-      get 'line_labels'
+      post 'line_labels'
     end
   end
 
