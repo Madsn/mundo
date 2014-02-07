@@ -31,17 +31,22 @@ ActiveRecord::Schema.define(version: 20140204191240) do
   add_index "users", ["username"], name: "index_users_on_username", unique: true
 
   create_table "workouts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "endo_workout_id"
     t.string   "username"
     t.string   "sport",         limit: 50
     t.integer  "endo_sport_id"
-    t.float    "distance"
+    t.float    "distance_km"
     t.datetime "start_time"
-    t.integer  "duration"
+    t.integer  "duration_sec"
+    t.float    "max_speed_kmh"
+    t.integer  "calories"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "workouts", ["endo_sport_id"], name: "index_workouts_on_endo_sport_id"
-  add_index "workouts", ["username"], name: "index_workouts_on_username"
+  add_index "workouts", ["endo_workout_id"], name: "index_workouts_on_endo_workout_id", unique: true
+  add_index "workouts", ["user_id"], name: "index_workouts_on_user_id"
 
 end

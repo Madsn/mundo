@@ -6,18 +6,26 @@ class ChartsController < ApplicationController
     paces = Array.new
     dates = Array.new
     count = params[:count] ? params[:count] : 30
-    Workout.all(:order => "start_time DESC", :limit => count).each do |w|
-      distances.unshift((w.distance / 1000))
-      durations.unshift(w.duration)
-      dates.unshift(w.start_time.to_date)
-      paces.unshift((w.duration / (w.distance/1000)).round(2))
+    Workout.where(:endo_sport_id => params[:sport_id]).order("start_time DESC").limit(count).each do |w|
+      if w.distance
+        distances.unshift((w.distance_km / 1000))
+      end
+      if w.duration
+        durations.unshift(w.duration_sec)
+      end
+      if w.start_time
+        dates.unshift(w.start_time.to_date)
+      end
+      if w.duration and w.distance
+        paces.unshift((w.duration_sec / (w.distance_km/1000)).round(2))
+      end
     end
     @chart = LazyHighCharts::HighChart.new('line_labels') do |f|
       f.chart({
          type: 'line'
       })
       f.title({
-        text: 'Run stats'
+        text: 'Stats'
       })
       f.subtitle({
           text: 'Trine Larsen'
@@ -37,11 +45,11 @@ class ChartsController < ApplicationController
       })
       f.plotOptions({
          line: {
-                             dataLabels: {
-                                                     enabled: true
-                                                 },
-                             enableMouseTracking: false
-                         }
+                 dataLabels: {
+                                     enabled: true
+                                 },
+                           enableMouseTracking: false
+                       }
       })
       f.series({
         name: 'Distance (km)',
