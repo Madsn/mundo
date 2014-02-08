@@ -1,14 +1,12 @@
 <h1>Listing workouts</h1>
-
 <table>
   <thead>
     <tr>
       <th>Username</th>
-      <th>Sport</th>
-      <th>Endo sport</th>
-      <th>Distance</th>
+      <th>Sport (Endomondo ID)</th>
       <th>Start time</th>
       <th>Duration</th>
+      <th>Distance (km)</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,12 +16,15 @@
   <tbody>
     <% @workouts.each do |workout| %>
       <tr>
-        <td><%= workout.username %></td>
-        <td><%= workout.sport %></td>
-        <td><%= workout.endo_sport_id %></td>
-        <td><%= workout.distance %></td>
-        <td><%= workout.start_time %></td>
-        <td><%= workout.duration %></td>
+        <td><%= workout['username'] %></td>
+        <td><%= workout['sport'] %></td>
+        <td><%= workout['start_time'] %></td>
+        <%= @time = workout['duration_sec'];
+            @hours = @time/3600;
+            @minutes = @time/60 - @hours * 60;
+            @seconds = @time - (@minutes * 60 + @hours * 3600); %>
+        <td><%= '%.2d:%.2d:%.2d' % [@hours, @minutes, @seconds] %></td>
+        <td><%= workout['distance_km'] %></td>
         <td><%= link_to 'Show', workout %></td>
         <td><%= link_to 'Edit', edit_workout_path(workout) %></td>
         <td><%= link_to 'Destroy', workout, method: :delete, data: { confirm: 'Are you sure?' } %></td>

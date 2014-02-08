@@ -11,13 +11,8 @@
 </p>
 
 <p>
-  <strong>Endo sport:</strong>
-  <%= @workout.endo_sport_id %>
-</p>
-
-<p>
   <strong>Distance:</strong>
-  <%= @workout.distance %>
+  <%= @workout.distance_km %>
 </p>
 
 <p>
@@ -27,7 +22,7 @@
 
 <p>
   <strong>Duration:</strong>
-  <%= @workout.duration %>
+  <%= @workout.duration_sec %>
 </p>
 
 <%= link_to 'Edit', edit_workout_path(@workout) %> |

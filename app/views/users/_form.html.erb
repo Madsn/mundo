@@ -20,12 +20,8 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :auth_token %><br>
-    <%= f.text_field :auth_token %>
-  </div>
-  <div class="field">
     <%= f.label :password %><br>
-    <%= f.text_field :password %>
+    <%= f.password_field :password, :placeholder => "************" %>
   </div>
   <div class="actions">
     <%= f.submit %>

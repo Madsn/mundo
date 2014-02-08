@@ -25,8 +25,6 @@ class WorkoutsController < ApplicationController
   # POST /workouts.json
   def create
     @params = workout_params
-    @params[:distance] = @params[:distance].to_f / 1000
-    puts workout_params
     @workout = Workout.new(@params)
 
     respond_to do |format|
@@ -72,6 +70,6 @@ class WorkoutsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def workout_params
-      params.require(:workout).permit(:username, :sport, :endo_sport_id, :distance, :start_time, :duration)
+      params.require(:workout).permit(:username, :sport, :distance_km, :start_time, :duration_sec)
     end
 end

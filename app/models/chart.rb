@@ -1,3 +1,3 @@
-class Chart < ActiveRecord::Base
+class Chart
 
 end

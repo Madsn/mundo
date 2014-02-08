@@ -20,20 +20,16 @@
     <%= f.text_field :sport %>
   </div>
   <div class="field">
-    <%= f.label :endo_sport_id %><br>
-    <%= f.number_field :endo_sport_id %>
-  </div>
-  <div class="field">
-    <%= f.label "distance in meters" %><br>
-    <%= f.number_field :distance %>
+    <%= f.label :distance_km %><br>
+    <%= f.number_field :distance_km, :step => "any" %>
   </div>
   <div class="field">
     <%= f.label :start_time %><br>
-    <%= f.date_select :start_time %>
+    <%= f.datetime_field :start_time %>
   </div>
   <div class="field">
-    <%= f.label :duration %><br>
-    <%= f.number_field :duration %>
+    <%= f.label :duration_sec %><br>
+    <%= f.number_field :duration_sec %>
   </div>
   <div class="actions">
     <%= f.submit %>
