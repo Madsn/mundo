@@ -45,5 +45,4 @@ end
 # gem 'debugger', group: [:development, :test]
 gem 'lazy_high_charts'
 gem 'mongoid', '4.0.0.beta1'
-#gem 'mongoid', github: 'mongoid/mongoid'
-#gem 'bson_ext', '~> 1.9.2'
+gem 'omniauth'
