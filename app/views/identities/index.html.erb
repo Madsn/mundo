@@ -1,0 +1,31 @@
+<h1>Listing identities</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Password digest</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @identities.each do |ident| %>
+    <tr>
+      <td><%= ident.name %></td>
+      <td><%= ident.email %></td>
+      <td><%= ident.password_digest %><td>
+      <td><%= link_to 'Show', ident %></td>
+      <td><%= link_to 'Edit', edit_identity_path(ident) %></td>
+      <td><%= link_to 'Destroy', ident, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path %>

@@ -1,17 +1,18 @@
 Mundo::Application.routes.draw do
 
-  root :to => "home#index"
-
   resources :charts do
     collection do
       post 'line_labels'
     end
   end
 
-  post '/auth/:provider/callback' => 'sessions#create'
-  get '/signin' => 'sessions#new', :as => :signin
-  get '/signout' => 'sessions#destroy', :as => :signout
-  get '/auth/failure' => 'sessions#failure'
+  root to: "sessions#new"
+  post "/auth/:provider/callback", to: "sessions#create"
+  get "/auth/failure", to: "sessions#failure"
+  get "/logout", to: "sessions#destroy", :as => "logout"
+  get "/login", to: "sessions#new", :as => "login"
+
+  resources :identities
 
   resources :workouts
 

@@ -8,7 +8,7 @@ class User
   field :uid, type: String
   field :email, type: String
   field :last_checked, type: DateTime
-  field :password, type: String
+  field :password, type: String #endomondo password
 
   #validates_presence_of :email, :password, :username
   validates_uniqueness_of :email, :case_sensitive => false
@@ -18,15 +18,20 @@ class User
   index({ email: 1 }, { unique: true, background: true })
   index({ username: 1 }, { unique: true, background: true })
 
+  def self.from_omniauth(auth)
+    find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth)
+  end
+
+  def self.find_by_provider_and_uid(provider, uid)
+    where(provider: provider, uid: uid).first
+  end
+
   def self.create_with_omniauth(auth)
     create! do |user|
-      user.provider = auth['provider']
-      user.uid = auth['uid']
-      if auth['info']
-        user.username = auth['info']['name'] || ""
-        user.email = auth['info']['email'] || ""
-        user.password = "jqntkvak"
-      end
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.username = auth["info"]["name"]
+      user.email = auth["info"]["email"]
     end
   end
 end
