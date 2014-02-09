@@ -19,10 +19,10 @@ class ChartsController < ApplicationController
          type: 'line'
       })
       f.title({
-        text: 'Stats'
+        text: 'Stats (sport id: ' + params[:sport_id] + ")"
       })
       f.subtitle({
-          text: 'Trine Larsen'
+          text: 'Date interval: ' + dates[0].strftime('%B %d, %Y') + ' -> ' + dates.last().strftime('%B %d, %Y')
       })
       f.xAxis({
         categories: dates
