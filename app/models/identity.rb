@@ -5,6 +5,7 @@ class Identity
   field :email, type: String
   field :name, type: String
   field :password_digest, type: String
+  field :endomondo_password, type: String
 
   validates_presence_of :name
   validates_uniqueness_of :email

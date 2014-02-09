@@ -29,7 +29,7 @@
   </div>
   <div class="field">
     <%= label_tag :endomondo_password %><br>
-    <%= password_field_tag :endomondo_password %>
+    <%= password_field_tag :endomondo_password, @identity.try(:endomondo_password) %>
   </div>
   <div class="actions"><%= submit_tag "Register" %></div>
 <% end %>
