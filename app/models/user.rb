@@ -32,6 +32,7 @@ class User
       user.uid = auth["uid"]
       user.username = auth["info"]["name"]
       user.email = auth["info"]["email"]
+      user.password = auth["info"]["endomondo_password"]
     end
   end
 end
