@@ -19,7 +19,7 @@ class User
   index({ username: 1 }, { unique: true, background: true })
 
   def self.from_omniauth(auth, endomondo_password=nil)
-    find_by_provider_and_uid(auth["provider"], auth["uid"]) || create_with_omniauth(auth, endomondo_password)
+    find_by_provider_and_uid(auth["provider"], auth["uid"].downcase) || create_with_omniauth(auth, endomondo_password)
   end
 
   def self.find_by_provider_and_uid(provider, uid)
@@ -31,7 +31,7 @@ class User
       user.provider = auth["provider"]
       user.uid = auth["uid"]
       user.username = auth["info"]["name"]
-      user.email = auth["info"]["email"]
+      user.email = auth["info"]["email"].downcase
       user.password = endomondo_password
       p "endomondo password:"
       p auth["info"]["endomondo_password"]

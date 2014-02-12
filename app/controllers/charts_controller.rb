@@ -6,7 +6,7 @@ class ChartsController < ApplicationController
     paces = Array.new
     dates = Array.new
     count = params[:count] ? params[:count] : 30
-    Workout.where(:user_id => current_user[:id], :sport => params[:sport_id].to_i).order_by(:start_time.asc).limit(count).each do |w|
+    Workout.where(:user_id => current_user[:id], :sport => params[:sport_id].to_i).order_by(:start_time.desc).limit(count).each do |w|
       if not w['distance_km'].blank?
         distances.unshift((w['distance_km'].round(2)))
         dates.unshift(w['start_time'].to_date)
@@ -14,15 +14,21 @@ class ChartsController < ApplicationController
       end
       durations.unshift((w['duration_sec']/60).round(2))
     end
+    subtitle_text = ""
+    if not dates[0]
+      subtitle_text = 'No data available'
+    else
+      subtitle_text = 'Date interval: ' + dates[0].strftime('%B %d, %Y') + ' -> ' + dates.last().strftime('%B %d, %Y')
+    end
     @chart = LazyHighCharts::HighChart.new('line_labels') do |f|
       f.chart({
-         type: 'line'
+         type: 'scatter'
       })
       f.title({
         text: 'Stats (sport id: ' + params[:sport_id] + ")"
       })
       f.subtitle({
-          text: 'Date interval: ' + dates[0].strftime('%B %d, %Y') + ' -> ' + dates.last().strftime('%B %d, %Y')
+            text: subtitle_text
       })
       f.xAxis({
         categories: dates
@@ -30,34 +36,42 @@ class ChartsController < ApplicationController
       f.yAxis({
       })
       f.tooltip({
-        enabled: false,
+        enabled: true,
         formatter: %|function() {
                              return '<b>'+ this.series.name +'</b><br/>'+
-                                 this.x +': '+ this.y +'°C';
+                                 this.x +': '+ this.y;
                          }|.js_code
-
       })
       f.plotOptions({
-         line: {
-                 dataLabels: {
-                                     enabled: true
-                                 },
-                           enableMouseTracking: false
-                       }
+         series: {
+             enableMouseTracking: true,
+             dataLabels: {
+                 enabled: true
+             }
+           }
       })
       f.series({
         name: 'Distance (km)',
-        data: distances
+        data: distances,
+        dataLabels: {
+            format: '{y} km'
+        }
       })
       f.series({
         name: 'Duration (minutes)',
         data: durations,
         visible: false,
-        legendIndex: 500
+        legendIndex: 500,
+        dataLabels: {
+            format: '{y} min'
+        }
       })
       f.series({
         name: 'Pace (min/km)',
-        data: paces
+        data: paces,
+        dataLabels: {
+            format: '{y} min/km'
+        }
       })
     end
   end
