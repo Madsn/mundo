@@ -1,10 +1,10 @@
 <div class="container">
-  <div class="row">
+  <div class="row" style="padding-top: 30px;">
     <div class="span3 bs-docs-sidebar">
       <ul>
-        <%= form_tag({:action => "line_labels", :controller => "charts"}, remote: true) do -%>
+        <%= form_tag({:action => "line_labels", :controller => "charts"}, class: "form-inline", remote: true) do -%>
           Show the last
-          <%= number_field_tag('count', 20) %>
+          <%= number_field_tag 'count', 20, class: "form-control", style: "width: 100px;" %>
           workouts of type
           <%= select_tag(:sport_id, options_for_select([
            ['Aerobics', 23],
@@ -65,9 +65,8 @@
            ['Weight training', 46],
            ['Wheelchair', 92],
            ['Windsurfing', 13],
-           ['Yoga', 47]], 18), onchange: "$(this).parent('form').submit();") %>
-          <br>
-          <%= submit_tag 'show/update chart', remote: true %>
+           ['Yoga', 47]], 18), onchange: "$(this).parent('form').submit();", class: "form-control") %>
+          <%= submit_tag 'show/update chart', remote: true, class: "form-control btn-primary" %>
         <% end -%>
       </ul>
     </div>

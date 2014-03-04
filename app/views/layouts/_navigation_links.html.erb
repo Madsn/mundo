@@ -1,0 +1,14 @@
+<%# add navigation links to this file %>
+<% if current_user %>
+  <li>
+    Logged in as <%= current_user.username %>
+  </li>
+  <li>
+    <%= link_to 'Logout', logout_path %>
+  </li>
+<% else %>
+  <li>
+    <%= link_to 'Login', login_path %>
+  </li>
+<% end %>
+

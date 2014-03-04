@@ -32,6 +32,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+  gem 'rails_layout'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
@@ -46,3 +50,4 @@ end
 gem 'lazy_high_charts'
 gem 'mongoid', '4.0.0.beta1'
 gem 'omniauth-identity', '~> 1.0'
+gem 'bootstrap-sass', '~> 3.1.1'
