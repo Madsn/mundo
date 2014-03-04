@@ -1,35 +1,42 @@
-<h1>New Account</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <h1>New Account</h1>
 
-<%= form_tag "/auth/identity/register" do %>
-  <% if @identity && @identity.errors.any? %>
-    <div class="error_messages">
-      <h2><%= pluralize(@identity.errors.count, "error") %> prohibited this account from being saved:</h2>
-      <ul>
-      <% @identity.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <%= form_tag "/auth/identity/register", class: "form-horizontal" do %>
+        <% if @identity && @identity.errors.any? %>
+          <div class="error_messages">
+            <h2><%= pluralize(@identity.errors.count, "error") %> prohibited this account from being saved:</h2>
+            <ul>
+            <% @identity.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= label_tag "Username" %><br>
+          <%= text_field_tag :name, @identity.try(:name), :placeholder => "Bob", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag "E-mail (the same as you use for endomondo)" %><br>
+          <%= text_field_tag :email, @identity.try(:email), :placeholder => "bob@mail.com", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag :password %><br>
+          <%= password_field_tag :password, "", :placeholder => "****", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag :password_confirmation %><br>
+          <%= password_field_tag :password_confirmation, "", :placeholder => "****", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag :endomondo_password %><br>
+          <%= password_field_tag :endomondo_password, @identity.try(:endomondo_password), :placeholder => "****", class: "form-control" %>
+        </div>
+        <div class="actions"><%= submit_tag "Register", class: "form-control btn-primary" %></div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-  <div class="field">
-    <%= label_tag "Username" %><br>
-    <%= text_field_tag :name, @identity.try(:name) %>
   </div>
-  <div class="field">
-    <%= label_tag "E-mail (the same as you use for endomondo)" %><br>
-    <%= text_field_tag :email, @identity.try(:email) %>
-  </div>
-  <div class="field">
-    <%= label_tag :password %><br>
-    <%= password_field_tag :password %>
-  </div>
-  <div class="field">
-    <%= label_tag :password_confirmation %><br>
-    <%= password_field_tag :password_confirmation %>
-  </div>
-  <div class="field">
-    <%= label_tag :endomondo_password %><br>
-    <%= password_field_tag :endomondo_password, @identity.try(:endomondo_password) %>
-  </div>
-  <div class="actions"><%= submit_tag "Register" %></div>
-<% end %>
+</div>
