@@ -1,6 +1,5 @@
 $('.js-line-labels').addClass('active').siblings().removeClass('active');
 
-
 $('#line-labels')
   .append("<%= escape_javascript(
                           high_chart('chart_line-labels', @chart)) -%>")
