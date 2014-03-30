@@ -17,3 +17,4 @@
 
 # Ignore project files
 /.idea
+config/mongoid.yml
