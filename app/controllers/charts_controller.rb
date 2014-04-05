@@ -7,12 +7,12 @@ class ChartsController < ApplicationController
     dates = Array.new
     count = params[:count] ? params[:count] : 30
     Workout.where(:user_id => current_user[:id], :sport => params[:sport_id].to_i).order_by(:start_time.desc).limit(count).each do |w|
-      if not w['distance_km'].blank?
+      if not (w['distance_km'].blank? or w['distance_km'] == 0)
         distances.unshift((w['distance_km'].round(2)))
         dates.unshift(w['start_time'].to_date)
         paces.unshift(((w['duration_sec']/60) / (w['distance_km'])).round(2))
+        durations.unshift((w['duration_sec']/60).round(2))
       end
-      durations.unshift((w['duration_sec']/60).round(2))
     end
     subtitle_text = ""
     if not dates[0]
